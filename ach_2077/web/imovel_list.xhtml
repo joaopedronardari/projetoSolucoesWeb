@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>ACH 2077</title>
+    </h:head>
+    
+    <h:body style="padding-top: 50px; padding-bottom: 20px;">
+        <ui:include src="/header.xhtml" />
+        
+        
+        <b:container>
+            <b:row>
+                <b:column col-md="12">
+                    <h2>Imóveis cadastrados</h2>
+                    <p>
+                        <h:panelGroup>
+                            <ul>
+                                <ui:repeat value="#{imovelBean.imoveis}" var="imovel">
+                                    <li>
+                                        <h3><h:outputText value="#{imovel.titulo}"></h:outputText></h3>
+                                        <p><h:outputText value="#{imovel.descricao}"></h:outputText></p>
+                                        <a href="imovel_view.xhtml?id_imovel=#{imovel.id_imovel}">Ver Detalhes</a>
+                                    </li>
+                                </ui:repeat>
+                            </ul>
+                        </h:panelGroup>
+                    </p>
+                </b:column>
+            </b:row>
+            <hr/>
+        </b:container>
+        
+        <ui:include src="/footer.xhtml" />
+
+    </h:body>
+</html>

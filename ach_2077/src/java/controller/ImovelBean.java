@@ -5,6 +5,10 @@
  */
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -23,7 +27,24 @@ import repository.ImovelRepository;
 @ManagedBean
 public class ImovelBean {
     
-    private Imovel imovel = new Imovel();
+    private Imovel imovel;
+    
+    private List<Imovel> imoveis;
+    
+    @PostConstruct
+    public void init() {
+        imovel = new Imovel();
+        
+        EntityManager manager = this.getEntityManager();
+        ImovelRepository repository = new ImovelRepository(manager);
+        
+        Map<String, String> urlParameters = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        if (urlParameters.containsKey("id_imovel")){
+            imovel = repository.buscaImovel(urlParameters.get("id_imovel"));
+        }
+        
+        imoveis = repository.buscaTodos();
+    }
     
     public void adicionaImovel(){
         EntityManager manager = this.getEntityManager();
@@ -43,9 +64,19 @@ public class ImovelBean {
         return imovel;
     }
 
+    public List<Imovel> getImoveis() {
+        return imoveis;
+    }
+
     public void setImovel(Imovel imovel) {
         this.imovel = imovel;
     }
+
+    public void setImoveis(List<Imovel> imoveis) {
+        this.imoveis = imoveis;
+    }
+
+
     
     
 }

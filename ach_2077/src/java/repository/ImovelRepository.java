@@ -17,6 +17,7 @@ import model.Imovel;
 public class ImovelRepository {
     private EntityManager manager;
     
+    
     public ImovelRepository (EntityManager manager){
         this.manager = manager;
     }
@@ -28,7 +29,11 @@ public class ImovelRepository {
     }
     
     public List<Imovel> buscaTodos(){
-        Query query = this.manager.createQuery("SELECT * FROM imoveis");
+        Query query = this.manager.createQuery("SELECT x FROM Imovel x");
         return query.getResultList();
+    }
+    
+    public Imovel buscaImovel(String idImovel){
+        return this.manager.find(Imovel.class, Long.parseLong(idImovel));
     }
 }
