@@ -16,14 +16,46 @@
         <b:container>
             <b:row>
                 <b:column col-md="12">
-                    <h2>Imóveis cadastrados</h2>
+                    <h2>Visualização de Imóvel</h2>
                     <p>
-                        <h:panelGroup>
-                            <h3><h:outputText value="#{imovelBean.imovel.titulo}"></h:outputText></h3>
-                            <p><h:outputText value="#{imovelBean.imovel.descricao}"></h:outputText></p>
-                            <p><h:outputText value="#{imovelBean.imovel.tipo}"></h:outputText></p>
-                            <p><h:outputText value="#{imovelBean.imovel.preco_venda}"></h:outputText></p>
-                        </h:panelGroup>
+                        <b:form>
+                            <h3>Informações Básicas</h3>
+                            
+                            <b:panelGrid colSpans="12" size="xs">
+                                <b:inputText value="#{imovelBean.imovel.titulo}" label="Título" disabled="true"></b:inputText>
+                                <b:inputTextarea value="#{imovelBean.imovel.descricao}" label="Descrição" disabled="true"/>
+                            </b:panelGrid>
+                            
+                            <b:panelGrid colSpans="3,3,3,3" size="xs">
+                                <b:selectOneMenu value="#{imovelBean.imovel.tipo}" label="Tipo" disabled="true">
+                                        <f:selectItem itemLabel="Apartamento" itemValue="APARTAMENTO"/>
+                                        <f:selectItem itemLabel="Casa" itemValue="CASA"/>
+                                        <f:selectItem itemLabel="Cobertura" itemValue="COBERTURA"/>
+                                </b:selectOneMenu>
+                                <b:inputText value="#{imovelBean.imovel.preco_venda}" label="Preço de Venda" disabled="true"></b:inputText>
+                                <b:inputText value="#{imovelBean.imovel.preco_aluguel}" label="Preço de Aluguel" disabled="true"></b:inputText>
+                                <b:inputText value="#{imovelBean.imovel.preco_condominio}" label="Preço de Condomínio" disabled="true"></b:inputText>
+
+                                <b:inputText value="#{imovelBean.imovel.area}" label="Área" disabled="true"></b:inputText>
+                                <b:inputText value="#{imovelBean.imovel.quartos}" label="Quartos" disabled="true"></b:inputText>
+                                <b:inputText value="#{imovelBean.imovel.suites}" label="Suítes" disabled="true"></b:inputText>
+                                <b:inputText value="#{imovelBean.imovel.vagas}" label="Vagas" disabled="true"></b:inputText>
+                            </b:panelGrid>
+                                
+                            <b:panelGrid colSpans="4,4,4" size="xs">
+                                <b:inputText value="#{imovelBean.imovel.estado}" label="Estado" disabled="true"></b:inputText>
+                                <b:inputText value="#{imovelBean.imovel.cidade}" label="Cidade" disabled="true"></b:inputText>
+                                <b:inputText value="#{imovelBean.imovel.endereco}" label="Endereço" disabled="true"></b:inputText>
+                            </b:panelGrid>
+                            
+                            <h:panelGroup rendered="#{not empty imovelBean.imovel.fotos}" style="margin-top:30px; margin-bottom: 50px" >
+                                <h4>Fotos adicionadas</h4>
+                                <ui:repeat value="#{imovelBean.imovel.fotos}" var="foto">
+                                    <img src="#{foto.url}" height="75"/>
+                                    <p><h:outputText value="#{foto.titulo}"></h:outputText></p>
+                                </ui:repeat>
+                            </h:panelGroup>
+                        </b:form>
                     </p>
                 </b:column>
             </b:row>

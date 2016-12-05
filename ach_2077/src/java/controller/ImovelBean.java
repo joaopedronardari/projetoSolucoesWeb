@@ -5,17 +5,14 @@
  */
 package controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.servlet.http.HttpServletRequest;
 import model.Imovel;
 import repository.ImovelRepository;
 
@@ -31,33 +28,42 @@ public class ImovelBean {
     
     private List<Imovel> imoveis;
     
+    private EntityManager manager;
+    
     @PostConstruct
     public void init() {
-        imovel = new Imovel();
-        
-        EntityManager manager = this.getEntityManager();
+        this.manager = this.getEntityManager();
         ImovelRepository repository = new ImovelRepository(manager);
         
-        Map<String, String> urlParameters = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        if (urlParameters.containsKey("id_imovel")){
-            imovel = repository.buscaImovel(urlParameters.get("id_imovel"));
-        }
-        
+        imovel = buscaImovel();
         imoveis = repository.buscaTodos();
     }
     
-    public void adicionaImovel(){
-        EntityManager manager = this.getEntityManager();
+    public String adicionaImovel(){
         ImovelRepository repository = new ImovelRepository(manager);
+        this.imovel = repository.adiciona(this.imovel);
+        return "imovel_edit.xhtml?id_imovel=" + this.imovel.getId_imovel() + "&faces-redirect=true"; 
+    }
+    
+    public String atualizaImovel(){
+        ImovelRepository repository = new ImovelRepository(manager);
+        repository.atualiza(this.imovel);
+        return "imovel_edit.xhtml?id_imovel=" + this.imovel.getId_imovel() + "&faces-redirect=true"; 
+    }
+    
+    private Imovel buscaImovel(){
+        ImovelRepository repository = new ImovelRepository(manager);
+        Map<String, String> urlParameters = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        if (urlParameters.containsKey("id_imovel")){
+            return repository.buscaImovel(urlParameters.get("id_imovel"));
+        }
         
-        repository.adiciona(this.imovel);
-        this.imovel = new Imovel();
+        return new Imovel();
     }
     
     private EntityManager getEntityManager(){
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("ach_2077PU");
-        EntityManager manager = factory.createEntityManager();
-        return manager;
+        return factory.createEntityManager();
     }
 
     public Imovel getImovel() {

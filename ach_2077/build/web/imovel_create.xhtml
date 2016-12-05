@@ -19,33 +19,35 @@
                     <h2>Cadastro de Imóvel</h2>
                     <p>
                         <b:form>
+                            <h3>Informações Básicas</h3>
                             <b:panelGrid colSpans="12" size="xs">
-                                <b:inputText value="#{imovelBean.imovel.titulo}" label="Título"></b:inputText>
-                                <b:inputTextarea value="#{imovelBean.imovel.descricao}" label="Descrição"/>
+                                <b:inputText value="#{imovelBean.imovel.titulo}" label="Título" required="true"></b:inputText>
+                                <b:inputTextarea value="#{imovelBean.imovel.descricao}" label="Descrição" required="true"/>
                             </b:panelGrid>
                             
                             <b:panelGrid colSpans="3,3,3,3" size="xs">
-                                <b:selectOneMenu value="#{imovelBean.imovel.tipo}" label="Tipo">
+                                <b:selectOneMenu value="#{imovelBean.imovel.tipo}" label="Tipo" required="true">
                                         <f:selectItem itemLabel="Apartamento" itemValue="APARTAMENTO"/>
                                         <f:selectItem itemLabel="Casa" itemValue="CASA"/>
                                         <f:selectItem itemLabel="Cobertura" itemValue="COBERTURA"/>
                                 </b:selectOneMenu>
-                                <b:inputText value="#{imovelBean.imovel.preco_venda}" label="Preço de Venda"></b:inputText>
-                                <b:inputText value="#{imovelBean.imovel.preco_aluguel}" label="Preço de Aluguel"></b:inputText>
-                                <b:inputText value="#{imovelBean.imovel.preco_condominio}" label="Preço de Condomínio"></b:inputText>
+                                <b:inputText value="#{imovelBean.imovel.preco_venda}" label="Preço de Venda" required="true"></b:inputText>
+                                <b:inputText value="#{imovelBean.imovel.preco_aluguel}" label="Preço de Aluguel" required="true"></b:inputText>
+                                <b:inputText value="#{imovelBean.imovel.preco_condominio}" label="Preço de Condomínio" required="true"></b:inputText>
 
-                                <b:inputText value="#{imovelBean.imovel.endereco}" label="Endereço"></b:inputText>
-                                <b:inputText value="#{imovelBean.imovel.bairro}" label="Bairro"></b:inputText>
-                                <b:inputText value="#{imovelBean.imovel.cidade}" label="Cidade"></b:inputText>
-                                <b:inputText value="#{imovelBean.imovel.estado}" label="Estado"></b:inputText>
-
-                                <b:inputText value="#{imovelBean.imovel.area}" label="Área"></b:inputText>
-                                <b:inputText value="#{imovelBean.imovel.quartos}" label="Quartos"></b:inputText>
-                                <b:inputText value="#{imovelBean.imovel.vagas}" label="Vagas"></b:inputText>
-                                <b:inputText value="#{imovelBean.imovel.suites}" label="Suítes"></b:inputText>
+                                <b:inputText value="#{imovelBean.imovel.area}" label="Área" required="true"></b:inputText>
+                                <b:inputText value="#{imovelBean.imovel.quartos}" label="Quartos" required="true"></b:inputText>
+                                <b:inputText value="#{imovelBean.imovel.suites}" label="Suítes" required="true"></b:inputText>
+                                <b:inputText value="#{imovelBean.imovel.vagas}" label="Vagas" required="true"></b:inputText>
+                            </b:panelGrid>
+                                
+                            <b:panelGrid colSpans="4,4,4" size="xs">
+                                <b:inputText value="#{imovelBean.imovel.estado}" label="Estado" required="true"></b:inputText>
+                                <b:inputText value="#{imovelBean.imovel.cidade}" label="Cidade" required="true"></b:inputText>
+                                <b:inputText value="#{imovelBean.imovel.endereco}" label="Endereço" required="true"></b:inputText>
                             </b:panelGrid>
                             
-                            <b:commandButton action="#{imovelBean.adicionaImovel}" value="Adicionar"/>
+                            <b:commandButton style="margin-top:30px;" action="#{imovelBean.adicionaImovel}" value="Adicionar"/>
                         </b:form>
                     </p>
                 </b:column>

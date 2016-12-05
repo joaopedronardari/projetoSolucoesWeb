@@ -3,6 +3,7 @@
   <persistence-unit name="ach_2077PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>model.Imovel</class>
+    <class>model.Foto</class>
     <properties>
             <!-- DADOS CONEXAO -->
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />

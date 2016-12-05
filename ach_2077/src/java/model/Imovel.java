@@ -1,10 +1,18 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /*
@@ -40,7 +48,24 @@ public class Imovel implements Serializable{
     private Integer quartos;
     private Integer vagas;
     private Integer suites;
+    
+    @ElementCollection(targetClass=Foto.class)
+    @JoinTable(
+        name = "fotos_imovel", 
+        joinColumns = @JoinColumn(name = "id_imovel"), 
+        inverseJoinColumns = @JoinColumn(name = "id_foto")
+    )
+    private Collection<Foto> fotos;
 
+    public Collection<Foto> getFotos() {
+        return fotos;
+    }
+
+    public void setFotos(Collection<Foto> fotos) {
+        this.fotos = fotos;
+    }
+
+    
     public Long getId_imovel() {
         return id_imovel;
     }

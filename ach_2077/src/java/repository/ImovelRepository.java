@@ -5,6 +5,7 @@
  */
 package repository;
 
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -22,10 +23,22 @@ public class ImovelRepository {
         this.manager = manager;
     }
     
-    public void adiciona (Imovel imovel){
+    public Imovel adiciona (Imovel imovel){
+        Date now = new Date();
+        imovel.setData_anuncio(now);
         this.manager.getTransaction().begin();
         this.manager.persist(imovel);
         this.manager.getTransaction().commit();
+        
+        return imovel;
+    }
+    
+    public Imovel atualiza (Imovel imovel){
+        this.manager.getTransaction().begin();
+        this.manager.merge(imovel);
+        this.manager.getTransaction().commit();
+
+        return imovel;
     }
     
     public List<Imovel> buscaTodos(){

@@ -16,10 +16,12 @@
         <b:container>
             <b:row>
                 <b:column col-md="12">
-                    <h2>Cadastro de Imóvel</h2>
+                    <h2>Edição de Imóvel</h2>
                     <p>
                         <b:form>
                             <h3>Informações Básicas</h3>
+                            <b:inputText value="#{imovelBean.imovel.id_imovel}" label="Id Imóvel" required="true"></b:inputText>
+                            
                             <b:panelGrid colSpans="12" size="xs">
                                 <b:inputText value="#{imovelBean.imovel.titulo}" label="Título" required="true"></b:inputText>
                                 <b:inputTextarea value="#{imovelBean.imovel.descricao}" label="Descrição" required="true"/>
@@ -47,7 +49,26 @@
                                 <b:inputText value="#{imovelBean.imovel.endereco}" label="Endereço" required="true"></b:inputText>
                             </b:panelGrid>
                             
-                            <b:commandButton style="margin-top:30px;" action="#{imovelBean.adicionaImovel}" value="Adicionar"/>
+                            
+                            <b:commandButton style="margin-top:30px; margin-bottom: 50px" action="#{imovelBean.atualizaImovel}" value="Atualizar"/>
+                            
+                            
+                            
+                            
+                            <h3>Adicionar Fotos</h3>
+                            <b:panelGrid colSpans="5,5,2" size="xs">
+                                <b:inputText value="#{fotoBean.foto.url}" label="URL" required="true"></b:inputText>
+                                <b:inputText value="#{fotoBean.foto.titulo}" label="Título" required="true"></b:inputText>
+                                <b:commandButton  style="margin-top:25px;" action="#{fotoBean.adicionaFoto(imovelBean.imovel.id_imovel)}" value="Adicionar Foto"/>
+                            </b:panelGrid>
+                            
+                            <h:panelGroup rendered="#{not empty imovelBean.imovel.fotos}">
+                                <h4>Fotos adicionadas</h4>
+                                <ui:repeat value="#{imovelBean.imovel.fotos}" var="foto">
+                                    <img src="#{foto.url}" height="75"/>
+                                    <p><h:outputText value="#{foto.titulo}"></h:outputText></p>
+                                </ui:repeat>
+                            </h:panelGroup>
                         </b:form>
                     </p>
                 </b:column>
