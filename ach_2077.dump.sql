@@ -56,7 +56,7 @@ CREATE TABLE `fotos_imovel` (
   PRIMARY KEY (`id_foto`),
   KEY `fk_fotos_imovel_id_imovel_idx` (`id_imovel`),
   CONSTRAINT `fk_fotos_imovel_1` FOREIGN KEY (`id_imovel`) REFERENCES `imoveis` (`id_imovel`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,6 +65,7 @@ CREATE TABLE `fotos_imovel` (
 
 LOCK TABLES `fotos_imovel` WRITE;
 /*!40000 ALTER TABLE `fotos_imovel` DISABLE KEYS */;
+INSERT INTO `fotos_imovel` VALUES (5,19,'http://digitalspyuk.cdnds.net/16/38/768x403/gallery-1474472774-yoda-008.jpg','yoda 1'),(6,19,'http://img.lum.dolimg.com/v1/images/ep3_ia_89377_r_bb46f7c6.jpeg?region=500%2C313%2C2925%2C1462&width=480','yoda 2'),(7,20,'https://cdn.sagaentretenimento.com.br/uploads/2016/06/22113456521528-668x376.jpg','vader 1'),(8,20,'http://i.imgur.com/roBqqW2.jpg','vader 2'),(9,21,'http://screencrush.com/442/files/2014/07/star-wars-episode-7-set-photos-skellig-island-luke-skywalker.jpg?w=720&cdnnode=1','luke 1'),(10,21,'http://img.lum.dolimg.com/v1/images/Luke-Skywalker_dd9c9f9b.jpeg?region=0%2C0%2C1536%2C864&width=768','luke 2');
 /*!40000 ALTER TABLE `fotos_imovel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,10 +97,11 @@ CREATE TABLE `imoveis` (
   `suites` int(10) DEFAULT NULL,
   `latitude` varchar(255) DEFAULT NULL,
   `longitude` varchar(255) DEFAULT NULL,
+  `visitas` int(10) NOT NULL,
   PRIMARY KEY (`id_imovel`),
   KEY `fk_imoveis_1_idx` (`id_usuario`),
-  CONSTRAINT `fk_imoveis_id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_imoveis_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,7 +110,7 @@ CREATE TABLE `imoveis` (
 
 LOCK TABLES `imoveis` WRITE;
 /*!40000 ALTER TABLE `imoveis` DISABLE KEYS */;
-INSERT INTO `imoveis` VALUES (1,NULL,'teste',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `imoveis` VALUES (19,NULL,'Imóvel 1 ','descrição do imóvel 1 atualizada',1000.00,100.00,10.00,'Rua Arlindo Béttio, 1000 ',NULL,NULL,'São Paulo','São Paulo','APARTAMENTO',NULL,555,5,5,5,NULL,NULL,16),(20,NULL,'Imovel 2','Descrição do imovel 2',2000.00,200.00,20.00,'Rua Arlindo Béttio, 1000 ',NULL,NULL,'São Paulo','São Paulo','CASA','2016-12-06 17:46:32',777,7,7,7,NULL,NULL,3),(21,NULL,'Imovel 3','Descricao do imovel 3',3000.00,300.00,30.00,'Rua Arlindo Béttio, 1000 ',NULL,NULL,'São Paulo','São Paulo','COBERTURA','2016-12-06 17:48:00',222,2,2,2,NULL,NULL,3);
 /*!40000 ALTER TABLE `imoveis` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,10 +152,10 @@ CREATE TABLE `mensagem` (
   `mensagem` text NOT NULL,
   `data_envio` datetime NOT NULL,
   PRIMARY KEY (`id_mensagem`),
-  KEY `fk_mensagem_1_idx` (`id_usuario_remetente`),
   KEY `fk_mensagem_1_idx1` (`id_usuario_destinatario`),
-  CONSTRAINT `fk_mensagem_id_usuario_destinatario` FOREIGN KEY (`id_usuario_destinatario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_mensagem_id_usuario_remetente` FOREIGN KEY (`id_usuario_remetente`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_mensagem_1_idx` (`id_usuario_remetente`),
+  CONSTRAINT `fk_mensagem_1` FOREIGN KEY (`id_usuario_remetente`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_mensagem_2` FOREIGN KEY (`id_usuario_destinatario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -174,14 +176,14 @@ DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuarios` (
-  `id_usuario` int(10) unsigned NOT NULL,
+  `id_usuario` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `senha` varchar(255) NOT NULL,
   `admin` varchar(255) NOT NULL DEFAULT '0',
   `telefone` varchar(255) NOT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -190,7 +192,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'admin','admin@admin.com','admin','1','9999999');
+INSERT INTO `usuarios` VALUES (1,'admin','admin@admin.com','admin','1','9999999'),(2,'Guilherme','guilherme.mt21@gmail.com','1234abcd','0','11991176997');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -203,4 +205,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-04 20:23:17
+-- Dump completed on 2016-12-06 17:50:08

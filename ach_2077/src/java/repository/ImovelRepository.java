@@ -28,6 +28,7 @@ public class ImovelRepository {
     public Imovel adiciona (Imovel imovel){
         Date now = new Date();
         imovel.setData_anuncio(now);
+        imovel.setVisitas(0);
         this.manager.getTransaction().begin();
         this.manager.persist(imovel);
         this.manager.getTransaction().commit();

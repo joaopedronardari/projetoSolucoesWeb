@@ -10,8 +10,8 @@ import javax.faces.bean.ManagedBean;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import model.Foto;
-import repository.FotoRepository;
+import model.Usuario;
+import repository.UsuarioRepository;
 
 /**
  *
@@ -19,49 +19,34 @@ import repository.FotoRepository;
  */
 
 @ManagedBean
-public class FotoBean {
+public class UsuarioBean {
     
-    private Foto foto;
+    private Usuario usuario;
     
     private EntityManager manager;
     
     @PostConstruct
     public void init() {
-        this.foto = new Foto();
         this.manager = this.getEntityManager();
+        usuario = new Usuario();
     }
     
-    public String adicionaFoto(Long idImovel){
-        FotoRepository repository = new FotoRepository(manager);
-        foto.setId_imovel(idImovel);
-        repository.adiciona(this.foto);
-        return "imovel_edit.xhtml?id_imovel=" + idImovel + "&faces-redirect=true"; 
+    public String adicionaUsuario(){
+        UsuarioRepository repository = new UsuarioRepository(manager);
+        this.usuario = repository.adiciona(this.usuario);
+        return "index.xhtml?id_usuario=" + this.usuario.getId_usuario() + "&faces-redirect=true"; 
     }
-    
     
     private EntityManager getEntityManager(){
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("ach_2077PU");
         return factory.createEntityManager();
     }
 
-    public Foto getFoto() {
-        return foto;
-    }
-
-    public EntityManager getManager() {
-        return manager;
-    }
-
-    public void setFoto(Foto foto) {
-        this.foto = foto;
-    }
-
-    public void setManager(EntityManager manager) {
-        this.manager = manager;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
 
-    
     
     
 }

@@ -47,6 +47,8 @@ public class ImovelBean {
     
     public String atualizaImovel(){
         ImovelRepository repository = new ImovelRepository(manager);
+        Imovel gambi = repository.buscaImovel(this.imovel.getId_imovel()+"");
+        this.imovel.setFotos(gambi.getFotos());
         repository.atualiza(this.imovel);
         return "imovel_edit.xhtml?id_imovel=" + this.imovel.getId_imovel() + "&faces-redirect=true"; 
     }

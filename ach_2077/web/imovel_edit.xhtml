@@ -20,7 +20,8 @@
                     <p>
                         <b:form>
                             <h3>Informações Básicas</h3>
-                            <b:inputText value="#{imovelBean.imovel.id_imovel}" label="Id Imóvel" required="true"></b:inputText>
+                            <b:inputText value="#{imovelBean.imovel.id_imovel}" type="hidden" required="true"></b:inputText>
+                            <b:inputText value="#{imovelBean.imovel.visitas}" type="hidden" required="true"></b:inputText>
                             
                             <b:panelGrid colSpans="12" size="xs">
                                 <b:inputText value="#{imovelBean.imovel.titulo}" label="Título" required="true"></b:inputText>
@@ -57,8 +58,8 @@
                             
                             <h3>Adicionar Fotos</h3>
                             <b:panelGrid colSpans="5,5,2" size="xs">
-                                <b:inputText value="#{fotoBean.foto.url}" label="URL" required="true"></b:inputText>
-                                <b:inputText value="#{fotoBean.foto.titulo}" label="Título" required="true"></b:inputText>
+                                <b:inputText value="#{fotoBean.foto.url}" label="URL"></b:inputText>
+                                <b:inputText value="#{fotoBean.foto.titulo}" label="Título"></b:inputText>
                                 <b:commandButton  style="margin-top:25px;" action="#{fotoBean.adicionaFoto(imovelBean.imovel.id_imovel)}" value="Adicionar Foto"/>
                             </b:panelGrid>
                             
