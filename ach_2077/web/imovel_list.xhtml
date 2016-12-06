@@ -12,7 +12,69 @@
     <h:body style="padding-top: 50px; padding-bottom: 20px;">
         <ui:include src="/header.xhtml" />
         
+        <b:container>
+            <b:row>
+                <b:column col-md="12">
+                    <h2>Busca de Imóveis</h2>
+                    <p>
+                        <b:form> 
+                            <b:well>
+                                <b:panelGrid colSpans="3,2,2,2,3" size="xs">
+                                    <b:inputText value="#{buscaBean.titulo}" label="Título"></b:inputText>
+                                    <b:selectOneMenu value="#{buscaBean.tipo}" label="Tipo">
+                                            <f:selectItem itemLabel="Todos" itemValue=""/>
+                                            <f:selectItem itemLabel="Apartamento" itemValue="APARTAMENTO"/>
+                                            <f:selectItem itemLabel="Casa" itemValue="CASA"/>
+                                            <f:selectItem itemLabel="Cobertura" itemValue="COBERTURA"/>
+                                    </b:selectOneMenu>
+                                    <b:inputText value="#{buscaBean.estado}" label="Estado"></b:inputText>
+                                    <b:inputText value="#{buscaBean.cidade}" label="Cidade"></b:inputText>
+                                    <b:inputText value="#{buscaBean.endereco}" label="Endereço"></b:inputText>
+                                </b:panelGrid>
+                            </b:well>
+                            
+                            
+                            <b:panelGrid colSpans="3,3,3,3" size="xs">
+                                <b:well>
+                                    <div>
+                                        <h4>Preço de Venda</h4>
+                                        <b:inputText value="#{buscaBean.preco_venda_min}" label="De"></b:inputText>
+                                        <b:inputText value="#{buscaBean.preco_venda_max}" label="Até"></b:inputText>
+                                    </div>
+                                </b:well>
+                                <b:well>
+                                    <div>
+                                        <h4>Preço de Aluguel</h4>
+                                        <b:inputText value="#{buscaBean.preco_aluguel_min}" label="De"></b:inputText>
+                                        <b:inputText value="#{buscaBean.preco_aluguel_max}" label="Até"></b:inputText>
+                                    </div>
+                                </b:well>
+                                <b:well>
+                                    <div>
+                                        <h4>Preço de Condomínio</h4>
+                                        <b:inputText value="#{buscaBean.preco_condominio_min}" label="De"></b:inputText>
+                                        <b:inputText value="#{buscaBean.preco_condominio_max}" label="Até"></b:inputText>
+                                    </div>
+                                </b:well>
+                                <b:well>
+                                    <div>
+                                        <h4>Área</h4>
+                                        <b:inputText value="#{buscaBean.area_min}" label="De"></b:inputText>
+                                        <b:inputText value="#{buscaBean.area_max}" label="Até"></b:inputText>
+                                    </div>
+                                </b:well>
+                            </b:panelGrid>
+                                
+                            <b:commandButton style="margin-top:30px;" action="#{buscaBean.filtraImoveis}" value="Filtrar"/>
+                        </b:form>
+                    </p>
+                </b:column>
+            </b:row>
+
+        </b:container>
         
+        <hr/>
+                    
         <b:container>
             <b:row>
                 <b:column col-md="12">
@@ -27,7 +89,7 @@
                                 <b:column span="3"><h4 style="text-align: center">Endereço</h4></b:column>
                                 <b:column span="2"><h4 style="text-align: center">Ação</h4></b:column>
                             </b:row>
-                            <ui:repeat value="#{imovelBean.imoveis}" var="imovel">
+                            <ui:repeat value="#{buscaBean.imoveis}" var="imovel">
                                 <b:row>
                                     <b:column span="2"><h:outputText value="#{imovel.titulo}"/></b:column>
                                     <b:column span="2" style="text-align: center"><h:outputText value="#{imovel.preco_venda}"/></b:column>

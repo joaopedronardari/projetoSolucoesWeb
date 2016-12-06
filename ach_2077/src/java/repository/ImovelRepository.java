@@ -5,8 +5,10 @@
  */
 package repository;
 
+import controller.BuscaBean;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import model.Imovel;
@@ -46,6 +48,42 @@ public class ImovelRepository {
         return query.getResultList();
     }
     
+    public List<Imovel> buscaAvancada(BuscaBean busca){
+        String condition = " WHERE 1=1 ";
+        
+        condition += (!isEmpty(busca.getTitulo())) ? " AND x.titulo LIKE :titulo " : "";
+        condition += (!isEmpty(busca.getTipo())) ? " AND x.tipo = :tipo " : "";
+        condition += (!isEmpty(busca.getEstado())) ? " AND x.estado LIKE :estado " : "";
+        condition += (!isEmpty(busca.getCidade())) ? " AND x.cidade LIKE :cidade " : "";
+        condition += (!isEmpty(busca.getEndereco())) ? " AND x.endereco LIKE :endereco " : "";
+        condition += (!isEmpty(busca.getPreco_venda_min())) ? " AND x.preco_venda >= :min_preco_venda " : "";
+        condition += (!isEmpty(busca.getPreco_venda_max())) ? " AND x.preco_venda <= :max_preco_venda " : "";
+        condition += (!isEmpty(busca.getPreco_aluguel_min())) ? " AND x.preco_aluguel >= :min_preco_aluguel" : "";
+        condition += (!isEmpty(busca.getPreco_aluguel_max())) ? " AND x.preco_aluguel <= :max_preco_aluguel " : "";
+        condition += (!isEmpty(busca.getPreco_condominio_min())) ? " AND x.preco_condominio >= :min_preco_condominio " : "";
+        condition += (!isEmpty(busca.getPreco_condominio_max())) ? " AND x.preco_condominio <= :max_preco_condominio " : "";
+        condition += (!isEmpty(busca.getArea_min())) ? " AND x.area >= :min_area " : "";
+        condition += (!isEmpty(busca.getArea_max())) ? " AND x.area <= :max_area " : "";
+        
+        Query query = this.manager.createQuery("SELECT x FROM Imovel x " + condition);
+        
+        if (!isEmpty(busca.getTitulo())) query.setParameter("titulo", "%"+busca.getTitulo()+"%");
+        if (!isEmpty(busca.getTipo())) query.setParameter("tipo", busca.getTipo());
+        if (!isEmpty(busca.getEstado())) query.setParameter("estado", "%"+busca.getEstado()+"%");
+        if (!isEmpty(busca.getCidade())) query.setParameter("cidade", "%"+busca.getCidade()+"%");
+        if (!isEmpty(busca.getEndereco())) query.setParameter("endereco", "%"+busca.getEndereco()+"%");
+        if (!isEmpty(busca.getPreco_venda_min())) query.setParameter("min_preco_venda", Double.parseDouble(busca.getPreco_venda_min()));
+        if (!isEmpty(busca.getPreco_venda_max())) query.setParameter("max_preco_venda", Double.parseDouble(busca.getPreco_venda_max()));
+        if (!isEmpty(busca.getPreco_aluguel_min())) query.setParameter("min_preco_aluguel", Double.parseDouble(busca.getPreco_aluguel_min()));
+        if (!isEmpty(busca.getPreco_aluguel_max())) query.setParameter("max_preco_aluguel", Double.parseDouble(busca.getPreco_aluguel_max()));
+        if (!isEmpty(busca.getPreco_condominio_min())) query.setParameter("min_preco_condominio", Double.parseDouble(busca.getPreco_condominio_min()));
+        if (!isEmpty(busca.getPreco_condominio_max())) query.setParameter("max_preco_condominio", Double.parseDouble(busca.getPreco_condominio_max()));
+        if (!isEmpty(busca.getArea_min())) query.setParameter("min_area", Double.parseDouble(busca.getArea_min()));
+        if (!isEmpty(busca.getArea_max())) query.setParameter("max_area", Double.parseDouble(busca.getArea_max()));
+        
+        return query.getResultList();
+    }
+    
     public Imovel buscaImovel(String idImovel){
         return this.manager.find(Imovel.class, Long.parseLong(idImovel));
     }
@@ -81,4 +119,8 @@ public class ImovelRepository {
         return query.setMaxResults(3).getResultList();
     }
     
+    
+    private boolean isEmpty(String text){
+        return text == null || text.isEmpty();
+    }
 }
