@@ -49,4 +49,36 @@ public class ImovelRepository {
     public Imovel buscaImovel(String idImovel){
         return this.manager.find(Imovel.class, Long.parseLong(idImovel));
     }
+    
+    public void incrementaVisita(Imovel imovel){
+        imovel.setVisitas(imovel.getVisitas()+1);
+        atualiza(imovel);
+    }
+    
+    
+    public List<Imovel> top3Compra(){
+        Query query = this.manager.createQuery("SELECT x FROM Imovel x ORDER BY (x.preco_venda/x.area) ASC");
+        return query.setMaxResults(3).getResultList();
+    }
+    
+    public List<Imovel> top3Aluguel(){
+        Query query = this.manager.createQuery("SELECT x FROM Imovel x ORDER BY (x.preco_aluguel/x.area) ASC");
+        return query.setMaxResults(3).getResultList();
+    }
+    
+    public List<Imovel> top3Casa(){
+        Query query = this.manager.createQuery("SELECT x FROM Imovel x ORDER BY visitas DESC");
+        return query.setMaxResults(3).getResultList();
+    }
+    
+    public List<Imovel> top3Apartamento(){
+        Query query = this.manager.createQuery("SELECT x FROM Imovel x ORDER BY visitas DESC");
+        return query.setMaxResults(3).getResultList();
+    }
+    
+    public List<Imovel> top3Cobertura(){
+        Query query = this.manager.createQuery("SELECT x FROM Imovel x ORDER BY visitas DESC");
+        return query.setMaxResults(3).getResultList();
+    }
+    
 }

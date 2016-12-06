@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>ACH 2077</title>
+    </h:head>
+    
+    <h:body style="padding-top: 50px; padding-bottom: 20px;">
+        <ui:include src="/header.xhtml" />
+        
+        
+        <b:container>
+            <b:row>
+                <b:column col-md="12">
+                    <h2>Melhores Promoções</h2>
+                    
+                    <h3 style="margin-top: 30px">Top 3: Imóveis para Comprar com o melhor m²</h3>
+                    <p>
+                        <b:container>
+                            <b:row>
+                                <ui:repeat value="#{ofertaBean.top3Compra}" var="imovel">
+                                    <b:column col-md="4">
+                                        <h4><h:outputText value="#{imovel.titulo}"></h:outputText></h4>
+                                        <p><h:outputText value="#{imovel.descricao}"></h:outputText></p>
+                                        <p>Preço de venda: <b><h:outputText value="#{imovel.preco_venda}"></h:outputText></b></p>
+                                        <p>Área: <b><h:outputText value="#{imovel.area}"></h:outputText></b></p>
+                                        <p>Preço por m²: <b><h:outputText value="#{imovel.preco_venda/imovel.area}"></h:outputText></b></p>
+                                        <p>Endereço: <b><h:outputText value="#{imovel.endereco}"></h:outputText></b></p>
+                                        <a href="imovel_view.xhtml?id_imovel=#{imovel.id_imovel}">Ver Detalhes</a>
+                                    </b:column>
+                                </ui:repeat>
+                            </b:row>
+                        </b:container>
+                    </p>
+                    
+                    <h3 style="margin-top: 30px">Top 3: Imóveis para Alugar com o melhor m²</h3>
+                    <p>
+                        <b:container>
+                            <b:row>
+                                <ui:repeat value="#{ofertaBean.top3Aluguel}" var="imovel">
+                                    <b:column col-md="4">
+                                        <h4><h:outputText value="#{imovel.titulo}"></h:outputText></h4>
+                                        <p><h:outputText value="#{imovel.descricao}"></h:outputText></p>
+                                        <p>Preço de aluguel: <b><h:outputText value="#{imovel.preco_aluguel}"></h:outputText></b></p>
+                                        <p>Área: <b><h:outputText value="#{imovel.area}"></h:outputText></b></p>
+                                        <p>Preço por m²: <b><h:outputText value="#{imovel.preco_aluguel/imovel.area}"></h:outputText></b></p>
+                                        <p>Endereço: <b><h:outputText value="#{imovel.endereco}"></h:outputText></b></p>
+                                        <a href="imovel_view.xhtml?id_imovel=#{imovel.id_imovel}">Ver Detalhes</a>
+                                    </b:column>
+                                </ui:repeat>
+                            </b:row>
+                        </b:container>
+                    </p>
+                    
+                    
+                    <hr style="margin-top: 30px"></hr>
+                    
+                    
+                    <h3 style="margin-top: 30px">Top 3: Imóveis do tipo Casa mais populares</h3>
+                    <p>
+                        <b:container>
+                            <b:row>
+                                <ui:repeat value="#{ofertaBean.top3Casa}" var="imovel">
+                                    <b:column col-md="4">
+                                        <h4><h:outputText value="#{imovel.titulo}"></h:outputText></h4>
+                                        <p><h:outputText value="#{imovel.descricao}"></h:outputText></p>
+                                        <p>Preço de venda: <b><h:outputText value="#{imovel.preco_venda}"></h:outputText></b></p>
+                                        <p>Preço de aluguel: <b><h:outputText value="#{imovel.preco_aluguel}"></h:outputText></b></p>
+                                        <p>Área: <b><h:outputText value="#{imovel.area}"></h:outputText></b></p>
+                                        <p>Endereço: <b><h:outputText value="#{imovel.endereco}"></h:outputText></b></p>
+                                        <a href="imovel_view.xhtml?id_imovel=#{imovel.id_imovel}">Ver Detalhes</a>
+                                    </b:column>
+                                </ui:repeat>
+                            </b:row>
+                        </b:container>
+                    </p>
+                    
+                    <h3 style="margin-top: 30px">Top 3: Imóveis do tipo Apartamento mais populares</h3>
+                    <p>
+                        <b:container>
+                            <b:row>
+                                <ui:repeat value="#{ofertaBean.top3Apartamento}" var="imovel">
+                                    <b:column col-md="4">
+                                        <h4><h:outputText value="#{imovel.titulo}"></h:outputText></h4>
+                                        <p><h:outputText value="#{imovel.descricao}"></h:outputText></p>
+                                        <p>Preço de venda: <b><h:outputText value="#{imovel.preco_venda}"></h:outputText></b></p>
+                                        <p>Preço de aluguel: <b><h:outputText value="#{imovel.preco_aluguel}"></h:outputText></b></p>
+                                        <p>Área: <b><h:outputText value="#{imovel.area}"></h:outputText></b></p>
+                                        <p>Endereço: <b><h:outputText value="#{imovel.endereco}"></h:outputText></b></p>
+                                        <a href="imovel_view.xhtml?id_imovel=#{imovel.id_imovel}">Ver Detalhes</a>
+                                    </b:column>
+                                </ui:repeat>
+                            </b:row>
+                        </b:container>
+                    </p>
+                    
+                    <h3 style="margin-top: 30px">Top 3: Imóveis do tipo Cobertura mais populares</h3>
+                    <p>
+                        <b:container>
+                            <b:row>
+                                <ui:repeat value="#{ofertaBean.top3Cobertura}" var="imovel">
+                                    <b:column col-md="4">
+                                        <h4><h:outputText value="#{imovel.titulo}"></h:outputText></h4>
+                                        <p><h:outputText value="#{imovel.descricao}"></h:outputText></p>
+                                        <p>Preço de venda: <b><h:outputText value="#{imovel.preco_venda}"></h:outputText></b></p>
+                                        <p>Preço de aluguel: <b><h:outputText value="#{imovel.preco_aluguel}"></h:outputText></b></p>
+                                        <p>Área: <b><h:outputText value="#{imovel.area}"></h:outputText></b></p>
+                                        <p>Endereço: <b><h:outputText value="#{imovel.endereco}"></h:outputText></b></p>
+                                        <a href="imovel_view.xhtml?id_imovel=#{imovel.id_imovel}">Ver Detalhes</a>
+                                    </b:column>
+                                </ui:repeat>
+                            </b:row>
+                        </b:container>
+                    </p>
+                </b:column>
+            </b:row>
+            <hr/>
+        </b:container>
+        
+        <ui:include src="/footer.xhtml" />
+
+    </h:body>
+</html>

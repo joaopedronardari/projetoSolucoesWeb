@@ -1,0 +1,4 @@
+-- Migration 001
+
+ALTER TABLE `imoveis` ADD COLUMN `visitas` INT(10) NOT NULL AFTER `longitude`;
+

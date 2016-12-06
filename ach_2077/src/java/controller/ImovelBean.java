@@ -55,7 +55,9 @@ public class ImovelBean {
         ImovelRepository repository = new ImovelRepository(manager);
         Map<String, String> urlParameters = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         if (urlParameters.containsKey("id_imovel")){
-            return repository.buscaImovel(urlParameters.get("id_imovel"));
+            Imovel imovel = repository.buscaImovel(urlParameters.get("id_imovel"));
+            repository.incrementaVisita(imovel);
+            return imovel;
         }
         
         return new Imovel();

@@ -11,7 +11,7 @@ Repositorio Privado para o projeto de Solucoes Web
 
 4- Dê um run no netbeans. Acesse a página http://localhost:8080/ach_2077/imoveis.xhtml. Insira um novo imóvel, e veja se ele foi salvo no banco de dados
 
-5- https://showcase.bootsfaces.net/Examples/ -> Para montar novas páginas com HTML e CSS bootstrappados
+5- http://showcase.bootsfaces.net/ -> Para montar novas páginas com HTML e CSS bootstrappados
 
 # troubleshooting
 1- Problemas com bibliotecas não encontradas: A referência pode estar quebrada. Botão direito no projeto -> Libraries, deleta as libs que estão com o "x" e reimporta as libs da pasta do projeto
