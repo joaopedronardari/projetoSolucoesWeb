@@ -4,15 +4,60 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:f="http://java.sun.com/jsf/core" 
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:m="http://code.google.com/p/gmaps4jsf/">
+    
+    <style type="text/css">
+        #map_container{
+                width:100%;
+                height:350px;
+        }
+    </style>
+    
+    <script>
+        
+      function initMap() {
+        // Create a map object and specify the DOM element for display.
+        var map = new google.maps.Map(document.getElementById('map_container'), {
+          center: {lat: -34.397, lng: 150.644},
+          scrollwheel: false,
+          zoom: 8
+        });
+        
+        var geocoder = new google.maps.Geocoder();
+
+        geocodeAddress(geocoder, map);
+        
+      }
+
+      function geocodeAddress(geocoder, resultsMap) {
+        var address = document.getElementById('input_j_idt22:address').value;
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === google.maps.GeocoderStatus.OK) {
+            resultsMap.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location
+            });
+            if (results[0].geometry.viewport) 
+                resultsMap.fitBounds(results[0].geometry.viewport);
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+      }
+
+    </script>
+         
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1MvYkVSELj8B8bXPHbayCeps5fzBajTw" type="text/javascript" ></script>   
+    
     <h:head>
         <title>ACH 2077</title>
     </h:head>
     
-    <h:body style="padding-top: 50px; padding-bottom: 20px;">
+   <h:body style="padding-top: 50px; padding-bottom: 20px;" onload="initMap()">
         <ui:include src="/header.xhtml" />
-        
-        
+                
         <b:container>
             <b:row>
                 <b:column col-md="12">
@@ -45,7 +90,7 @@
                             <b:panelGrid colSpans="4,4,4" size="xs">
                                 <b:inputText value="#{imovelBean.imovel.estado}" label="Estado" disabled="true"></b:inputText>
                                 <b:inputText value="#{imovelBean.imovel.cidade}" label="Cidade" disabled="true"></b:inputText>
-                                <b:inputText value="#{imovelBean.imovel.endereco}" label="Endereço" disabled="true"></b:inputText>
+                                <b:inputText id="address" value="#{imovelBean.imovel.endereco}" label="Endereço" disabled="true"></b:inputText>
                             </b:panelGrid>
                             
                             <h:panelGroup rendered="#{not empty imovelBean.imovel.fotos}" style="margin-top:30px; margin-bottom: 50px" >
@@ -60,8 +105,11 @@
                 </b:column>
             </b:row>
             <hr/>
-        </b:container>
+            
+        <div id="map_container"></div>
         
+        </b:container>        
+         
         <ui:include src="/footer.xhtml" />
 
     </h:body>
