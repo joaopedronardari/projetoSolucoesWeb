@@ -42,11 +42,16 @@ public class UsuarioBean {
         return factory.createEntityManager();
     }
 
+    public void adicionaFavorito(Long idImovel){
+        
+    }
+    
     public Usuario getUsuario() {
         return usuario;
     }
 
 
+    
     
     
 }

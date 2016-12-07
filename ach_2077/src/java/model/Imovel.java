@@ -28,6 +28,7 @@ public class Imovel implements Serializable{
     
     @Id @GeneratedValue
     private Long id_imovel;
+    private Long id_usuario;
     private String titulo;
     private String descricao;
     private Double preco_venda;
@@ -205,6 +206,14 @@ public class Imovel implements Serializable{
 
     public void setVisitas(Integer visitas) {
         this.visitas = visitas;
+    }
+
+    public Long getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(Long id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
    

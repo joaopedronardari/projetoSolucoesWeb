@@ -15,6 +15,23 @@
     
     <script>
         
+        function findGetParameter(parameterName) {
+            var result = null, tmp = [];
+            location.search.substr(1).split('&amp;').forEach(function (item) {
+                tmp = item.split('=');
+                if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+            });
+            return result;
+        };
+
+        function checkAlert(){
+            var alertMsg = findGetParameter('alert');
+            if (alertMsg !== 'undefined' &amp;&amp; alertMsg !== null){
+                alert('Mensagem enviada com sucesso');
+            }
+        };
+        
+        
       function initMap() {
         // Create a map object and specify the DOM element for display.
         var map = new google.maps.Map(document.getElementById('map_container'), {
@@ -26,11 +43,10 @@
         var geocoder = new google.maps.Geocoder();
 
         geocodeAddress(geocoder, map);
-        
       }
 
       function geocodeAddress(geocoder, resultsMap) {
-        var address = document.getElementById('input_j_idt22:address').value;
+        var address = '#{imovelBean.imovel.endereco}';
         geocoder.geocode({'address': address}, function(results, status) {
           if (status === google.maps.GeocoderStatus.OK) {
             resultsMap.setCenter(results[0].geometry.location);
@@ -45,7 +61,7 @@
           }
         });
       }
-
+      
     </script>
          
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1MvYkVSELj8B8bXPHbayCeps5fzBajTw" type="text/javascript" ></script>   
@@ -54,9 +70,10 @@
         <title>ACH 2077</title>
     </h:head>
     
-   <h:body style="padding-top: 50px; padding-bottom: 20px;" onload="initMap()">
+   <h:body style="padding-top: 50px; padding-bottom: 20px;" onload="initMap();checkAlert();">
         <ui:include src="/header.xhtml" />
-                
+
+        
         <b:container>
             <b:row>
                 <b:column col-md="12">
@@ -91,6 +108,18 @@
                                 <b:inputText value="#{imovelBean.imovel.cidade}" label="Cidade" disabled="true"></b:inputText>
                                 <b:inputText id="address" value="#{imovelBean.imovel.endereco}" label="Endereço" disabled="true"></b:inputText>
                             </b:panelGrid>
+                            
+                            <div style="margin-top:30px; margin-bottom: 50px">
+                                <h4>Ações</h4>
+                                <b:commandButton look="primary" style="margin-right:20px" action="#{usuarioBean.adicionaFavorito}" value="Adicionar como favorito">
+                                    
+                                </b:commandButton>
+                                <b:inputTextarea value="#{mensagemBean.mensagem.mensagem}" label="Mensagem"/>
+                                <b:commandButton look="primary" action="#{mensagemBean.enviaMensagem}" value="Enviar mensagem">
+                                    <f:param name="id_imovel" value="#{imovelBean.imovel.id_imovel}" />
+                                    <f:param name="id_usuario" value="#{imovelBean.imovel.id_usuario}" />
+                                </b:commandButton>
+                            </div>
                             
                             <h:panelGroup rendered="#{not empty imovelBean.imovel.fotos}" style="margin-top:30px; margin-bottom: 50px" >
                                 <h4>Fotos adicionadas</h4>
