@@ -25,11 +25,13 @@ DROP TABLE IF EXISTS `favoritos`;
 CREATE TABLE `favoritos` (
   `id_usuario` int(10) unsigned NOT NULL,
   `id_imovel` int(10) unsigned NOT NULL,
+  `id_favorito` int(10) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id_favorito`),
   KEY `fk_favoritos_id_usuario_idx` (`id_usuario`),
   KEY `fk_favoritos_id_imovel_idx` (`id_imovel`),
   CONSTRAINT `fk_favoritos_1` FOREIGN KEY (`id_imovel`) REFERENCES `imoveis` (`id_imovel`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_favoritos_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +40,7 @@ CREATE TABLE `favoritos` (
 
 LOCK TABLES `favoritos` WRITE;
 /*!40000 ALTER TABLE `favoritos` DISABLE KEYS */;
+INSERT INTO `favoritos` VALUES (1,19,1),(1,20,2),(2,21,4),(2,19,5),(2,19,6);
 /*!40000 ALTER TABLE `favoritos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +113,7 @@ CREATE TABLE `imoveis` (
 
 LOCK TABLES `imoveis` WRITE;
 /*!40000 ALTER TABLE `imoveis` DISABLE KEYS */;
-INSERT INTO `imoveis` VALUES (19,NULL,'Imóvel 1 ','descrição do imóvel 1 atualizada',1000.00,100.00,10.00,'Rua Arlindo Béttio, 1000 ',NULL,NULL,'São Paulo','São Paulo','APARTAMENTO',NULL,555,5,5,5,NULL,NULL,16),(20,NULL,'Imovel 2','Descrição do imovel 2',2000.00,200.00,20.00,'Rua Arlindo Béttio, 1000 ',NULL,NULL,'São Paulo','São Paulo','CASA','2016-12-06 17:46:32',777,7,7,7,NULL,NULL,3),(21,NULL,'Imovel 3','Descricao do imovel 3',3000.00,300.00,30.00,'Rua Arlindo Béttio, 1000 ',NULL,NULL,'São Paulo','São Paulo','COBERTURA','2016-12-06 17:48:00',222,2,2,2,NULL,NULL,3);
+INSERT INTO `imoveis` VALUES (19,2,'Imóvel 1 ','descrição do imóvel 1 atualizada!!!',1000.00,100.00,10.00,'Rua Arlindo Béttio, 1000 ',NULL,NULL,'São Paulo','São Paulo','APARTAMENTO',NULL,555,5,5,5,NULL,NULL,103),(20,2,'Imovel 2','Descrição do imovel 2',2000.00,200.00,20.00,'Rua Arlindo Béttio, 1000 ',NULL,NULL,'São Paulo','São Paulo','CASA','2016-12-06 17:46:32',777,7,7,7,NULL,NULL,4),(21,2,'Imovel 3','Descricao do imovel 3',3000.00,300.00,30.00,'Rua Arlindo Béttio, 1000 ',NULL,NULL,'São Paulo','São Paulo','COBERTURA','2016-12-06 17:48:00',222,2,2,2,NULL,NULL,3);
 /*!40000 ALTER TABLE `imoveis` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,7 +159,7 @@ CREATE TABLE `mensagem` (
   KEY `fk_mensagem_1_idx` (`id_usuario_remetente`),
   CONSTRAINT `fk_mensagem_1` FOREIGN KEY (`id_usuario_remetente`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_mensagem_2` FOREIGN KEY (`id_usuario_destinatario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -165,6 +168,7 @@ CREATE TABLE `mensagem` (
 
 LOCK TABLES `mensagem` WRITE;
 /*!40000 ALTER TABLE `mensagem` DISABLE KEYS */;
+INSERT INTO `mensagem` VALUES (1,1,2,'Funcionaaaaaaaaaa','2016-12-07 14:56:40'),(2,2,1,'Mensageeeeeem','2016-12-07 15:01:40'),(3,2,1,'teste','2016-12-07 15:03:46'),(4,1,2,'Mensagem com alert','2016-12-07 15:11:23'),(5,1,2,'Boaaaaaaaa','2016-12-07 15:13:10'),(11,1,2,'testeeeeeeeee','2016-12-07 17:38:39');
 /*!40000 ALTER TABLE `mensagem` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -205,4 +209,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-06 17:50:08
+-- Dump completed on 2016-12-07 17:42:56
