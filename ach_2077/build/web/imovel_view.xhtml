@@ -27,7 +27,12 @@
         function checkAlert(){
             var alertMsg = findGetParameter('alert');
             if (alertMsg !== 'undefined' &amp;&amp; alertMsg !== null){
-                alert('Mensagem enviada com sucesso');
+                if (alertMsg ==='favorito'){
+                    alert('Favorito adicionado com sucesso');
+                } 
+                if (alertMsg === 'mensagem'){
+                    alert('Mensagem enviada com sucesso');
+                }
             }
         };
         
@@ -111,8 +116,9 @@
                             
                             <div style="margin-top:30px; margin-bottom: 50px">
                                 <h4>Ações</h4>
-                                <b:commandButton look="primary" style="margin-right:20px" action="#{usuarioBean.adicionaFavorito}" value="Adicionar como favorito">
-                                    
+                                <b:commandButton look="primary" style="margin-right:20px" action="#{favoritoBean.adicionaFavorito}" value="Adicionar como favorito">
+                                    <f:param name="id_imovel" value="#{imovelBean.imovel.id_imovel}" />
+                                    <f:param name="id_usuario" value="#{imovelBean.imovel.id_usuario}" />
                                 </b:commandButton>
                                 <b:inputTextarea value="#{mensagemBean.mensagem.mensagem}" label="Mensagem"/>
                                 <b:commandButton look="primary" action="#{mensagemBean.enviaMensagem}" value="Enviar mensagem">

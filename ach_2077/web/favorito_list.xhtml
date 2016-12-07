@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>ACH 2077</title>
+    </h:head>
+    
+    
+    <h:body style="padding-top: 50px; padding-bottom: 20px;">
+        <ui:include src="/header.xhtml" />
+                    
+        <b:container>
+            <h1>Meus imóveis Favoritos</h1>
+            <hr/>
+            
+            <b:row>
+                <b:column col-md="12">
+                    <b:well>
+                        <b:form>
+                            <h:panelGroup>
+                            <b:row>
+                                <b:column span="2"><h4>Título</h4></b:column>
+                                <b:column span="2"><h4 style="text-align: center">Preço de venda</h4></b:column>
+                                <b:column span="2"><h4 style="text-align: center">Preço de aluguel</h4></b:column>
+                                <b:column span="1"><h4 style="text-align: center">Área</h4></b:column>
+                                <b:column span="3"><h4 style="text-align: center">Endereço</h4></b:column>
+                                <b:column span="2"><h4 style="text-align: center">Ação</h4></b:column>
+                            </b:row>
+                            <ui:repeat value="#{favoritoBean.favoritos}" var="imovel">
+                                <b:row>
+                                    <b:column span="2"><h:outputText value="#{imovel.titulo}"/></b:column>
+                                    <b:column span="2" style="text-align: center"><h:outputText value="#{imovel.preco_venda}"/></b:column>
+                                    <b:column span="2" style="text-align: center"><h:outputText value="#{imovel.preco_aluguel}"/></b:column>
+                                    <b:column span="1" style="text-align: center"><h:outputText value="#{imovel.area}"/></b:column>
+                                    <b:column span="3" style="text-align: center"><h:outputText value="#{imovel.endereco}"/></b:column>
+                                    <b:column span="2" style="text-align: center"><a href="imovel_view.xhtml?id_imovel=#{imovel.id_imovel}">Ver Detalhes</a></b:column>
+                                </b:row>
+                            </ui:repeat>
+                        </h:panelGroup>
+                        </b:form>
+                    </b:well>
+                </b:column>
+            </b:row>
+        </b:container>
+        
+        <ui:include src="/footer.xhtml" />
+
+    </h:body>
+</html>

@@ -60,7 +60,7 @@ public class MensagemBean {
         mensagem.setId_usuario_remetente(1L);
         repository.adiciona(mensagem);
         
-        return "imovel_view.xhtml?id_imovel=" + idImovel + "&faces-redirect=true&alert=true"; 
+        return "imovel_view.xhtml?id_imovel=" + idImovel + "&faces-redirect=true&alert=mensagem"; 
     }
     
     public String responderMensagem(String resposta){

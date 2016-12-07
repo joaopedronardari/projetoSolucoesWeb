@@ -6,6 +6,7 @@
     <class>model.Foto</class>
     <class>model.Usuario</class>
     <class>model.Mensagem</class>
+    <class>model.Favorito</class>
     <properties>
             <!-- DADOS CONEXAO -->
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />

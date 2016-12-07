@@ -42,6 +42,8 @@ public class ImovelBean {
     public String adicionaImovel(){
         ImovelRepository repository = new ImovelRepository(manager);
         this.imovel = repository.adiciona(this.imovel);
+        //TODO:setar id do usuario logado
+        this.imovel.setId_usuario(1l);
         return "imovel_edit.xhtml?id_imovel=" + this.imovel.getId_imovel() + "&faces-redirect=true"; 
     }
     
@@ -49,6 +51,9 @@ public class ImovelBean {
         ImovelRepository repository = new ImovelRepository(manager);
         Imovel gambi = repository.buscaImovel(this.imovel.getId_imovel()+"");
         this.imovel.setFotos(gambi.getFotos());
+        this.imovel.setFavoritos(gambi.getFavoritos());
+        //TODO:setar id do usuario logado
+        this.imovel.setId_usuario(1l);
         repository.atualiza(this.imovel);
         return "imovel_edit.xhtml?id_imovel=" + this.imovel.getId_imovel() + "&faces-redirect=true"; 
     }

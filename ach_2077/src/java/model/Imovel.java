@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /*
@@ -54,6 +55,23 @@ public class Imovel implements Serializable{
         inverseJoinColumns = @JoinColumn(name = "id_foto")
     )
     private Collection<Foto> fotos;
+    
+    @ElementCollection(targetClass=Favorito.class)
+    @JoinTable(
+        name = "favoritos", 
+        joinColumns = @JoinColumn(name = "id_imovel"), 
+        inverseJoinColumns = @JoinColumn(name = "id_favorito")
+    )
+    private Collection<Favorito> favoritos;
+
+    public void setFavoritos(Collection<Favorito> favoritos) {
+        this.favoritos = favoritos;
+    }
+    
+
+    public Collection<Favorito> getFavoritos() {
+        return favoritos;
+    }
 
     public Collection<Foto> getFotos() {
         return fotos;

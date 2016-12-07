@@ -5,8 +5,10 @@
  */
 package controller;
 
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -42,10 +44,6 @@ public class UsuarioBean {
         return factory.createEntityManager();
     }
 
-    public void adicionaFavorito(Long idImovel){
-        
-    }
-    
     public Usuario getUsuario() {
         return usuario;
     }
