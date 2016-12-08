@@ -114,7 +114,10 @@
                                 <b:inputText id="address" value="#{imovelBean.imovel.endereco}" label="Endereço" disabled="true"></b:inputText>
                             </b:panelGrid>
                             
-                            <div style="margin-top:30px; margin-bottom: 50px">
+                            
+                            
+                            
+                            <div style="margin-top:30px; margin-bottom: 50px; display:#{imovelBean.displayFavorite}">
                                 <h4>Ações</h4>
                                 <b:commandButton look="primary" style="margin-right:20px" action="#{favoritoBean.adicionaFavorito}" value="Adicionar como favorito">
                                     <f:param name="id_imovel" value="#{imovelBean.imovel.id_imovel}" />

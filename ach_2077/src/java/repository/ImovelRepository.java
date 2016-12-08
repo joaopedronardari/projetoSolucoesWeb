@@ -49,6 +49,12 @@ public class ImovelRepository {
         return query.getResultList();
     }
     
+    public List<Imovel> buscaMeusImoveis(Long userId){
+        Query query = this.manager.createQuery("SELECT x FROM Imovel x WHERE x.id_usuario = :usuarioId");
+        query.setParameter("usuarioId", userId);
+        return query.getResultList();
+    }
+    
     public List<Imovel> buscaAvancada(BuscaBean busca){
         String condition = " WHERE 1=1 ";
         

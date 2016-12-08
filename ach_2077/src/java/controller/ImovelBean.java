@@ -28,7 +28,25 @@ public class ImovelBean {
     
     private List<Imovel> imoveis;
     
+    private List<Imovel> meusImoveis;
+    
     private EntityManager manager;
+    
+    private String displayFavorite;
+
+    public String getDisplayFavorite() {
+        return displayFavorite;
+    }
+
+    public void setDisplayFavorite(String displayFavorite) {
+        this.displayFavorite = displayFavorite;
+    }
+
+    public List<Imovel> getMeusImoveis() {
+        return meusImoveis;
+    }
+    
+    
     
     @PostConstruct
     public void init() {
@@ -37,6 +55,11 @@ public class ImovelBean {
         
         imovel = buscaImovel();
         imoveis = repository.buscaTodos();
+        if ((Long) SessionUtils.getParam("userid") != null){
+            meusImoveis = repository.buscaMeusImoveis(((Long) SessionUtils.getParam("userid")));
+        }
+        
+        displayFavorite = ((Long) SessionUtils.getParam("userid")) == imovel.getId_usuario() ? "none" : "";
     }
     
     public String adicionaImovel(){
