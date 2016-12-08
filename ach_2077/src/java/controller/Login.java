@@ -52,14 +52,9 @@ public class Login implements Serializable {
                         System.out.println(userId);
 			SessionUtils.setParam("username", user);
                         SessionUtils.setParam("userid", userId);
-			return "index.xhtml";
+			return "index.xhtml?faces-redirect=true";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_WARN,
-							"Incorrect Username and Passowrd",
-							"Please enter correct username and Password"));
-			return "login.xhtml";
+			return "login.xhtml?faces-redirect=true&alert=loginfail";
 		}
 	}
 
