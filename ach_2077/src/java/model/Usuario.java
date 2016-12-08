@@ -4,6 +4,8 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /*
@@ -18,6 +20,9 @@ import javax.persistence.Table;
  */
 
 @Entity
+@NamedQueries(value = { @NamedQuery(name = "Usuario.findByEmailSenha",
+  query = "SELECT u FROM usuarios u "
+                     + "WHERE u.email = :email AND u.senha = :senha")})
 @Table(name="usuarios")
 public class Usuario implements Serializable{
     
