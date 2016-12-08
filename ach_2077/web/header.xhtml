@@ -1,21 +1,24 @@
+
 <ui:composition 
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:b="http://bootsfaces.net/ui"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-        
+    
+    <f:event type="preRenderView" listener="#{login.onPreRender}"/>
+    
     <b:navBar brand="Home" brandHref="index.xhtml" inverse="true" fixed="top">
         <b:navbarLinks>
-            <b:navLink value="Novo Imovel" href="imovel_create.xhtml"></b:navLink>
-            <b:navLink value="Busca de Imóveis" href="imovel_list.xhtml"></b:navLink>
+            <b:navLink style="display:#{login.displayLogout}" value="Novo Imovel" href="imovel_create.xhtml"></b:navLink>
+            <b:navLink style="display:#{login.displayLogout}" value="Busca de Imóveis" href="imovel_list.xhtml"></b:navLink>
             <b:navLink value="Cadastro de Usuário" href="usuario_create.xhtml"></b:navLink>
             
-            <b:navLink value="Mensagens" href="mensagem_list.xhtml"></b:navLink>
-            <b:navLink value="Favoritos" href="favorito_list.xhtml"></b:navLink>
+            <b:navLink style="display:#{login.displayLogout}" value="Mensagens" href="mensagem_list.xhtml"></b:navLink>
+            <b:navLink style="display:#{login.displayLogout}" value="Favoritos" href="favorito_list.xhtml"></b:navLink>
         </b:navbarLinks>
         
-        <h:form styleClass="navbar-form navbar-right">
+        <h:form styleClass="navbar-form navbar-right" style="display:#{login.displayLogin}">
             <div class="form-group">
                 <b:inputText placeholder="Email" value="#{login.user}" fieldSize="sm"/>
             </div>
@@ -25,7 +28,13 @@
             #{' '}
             <b:commandButton action="#{login.validateUsernamePassword}" value="Entrar" look="success" icon="chevron-right" iconAlign="right"/>
         </h:form>
+        
+        <h:form styleClass="navbar-form navbar-right" style="display:#{login.displayLogout}">
+            <b style="color:#ffffff; padding-right: 20px;">#{login.user}</b>
+            <b:commandButton action="#{login.logout}" value="Sair" look="warning" icon="chevron-right" iconAlign="right"/>
+        </h:form>
     </b:navBar>
     
 </ui:composition>
+
 

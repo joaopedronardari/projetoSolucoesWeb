@@ -20,9 +20,6 @@ import javax.persistence.Table;
  */
 
 @Entity
-@NamedQueries(value = { @NamedQuery(name = "Usuario.findByEmailSenha",
-  query = "SELECT u FROM usuarios u "
-                     + "WHERE u.email = :email AND u.senha = :senha")})
 @Table(name="usuarios")
 public class Usuario implements Serializable{
     

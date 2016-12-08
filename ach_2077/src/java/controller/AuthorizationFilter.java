@@ -32,18 +32,20 @@ public class AuthorizationFilter implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 		try {
 
-			HttpServletRequest reqt = (HttpServletRequest) request;
-			HttpServletResponse resp = (HttpServletResponse) response;
-			HttpSession ses = reqt.getSession(false);
+			HttpServletRequest req = (HttpServletRequest) request;
+                        HttpSession session = req.getSession();
 
-			String reqURI = reqt.getRequestURI();
-			if (reqURI.indexOf("/login.xhtml") >= 0
-					|| (ses != null && ses.getAttribute("username") != null)
-					|| reqURI.indexOf("/public/") >= 0
-					|| reqURI.contains("javax.faces.resource"))
-				chain.doFilter(request, response);
-			else
-				resp.sendRedirect(reqt.getContextPath() + "/login.xhtml");
+			if ((session.getAttribute("username") != null)
+				|| (req.getRequestURI().endsWith("login.xhtml"))
+				|| (req.getRequestURI().contains("javax.faces.resource/"))) {
+                                chain.doFilter(request, response);
+                        } else {
+                            if (!req.getRequestURI().endsWith("usuario_create.xhtml")) {
+                                redirect("/ach_2077/login.xhtml", response);
+                            } else {
+                                chain.doFilter(request, response);
+                            }
+                        }
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -52,5 +54,11 @@ public class AuthorizationFilter implements Filter {
 	@Override
 	public void destroy() {
 
+	}
+        
+        private void redirect(String url, ServletResponse response)
+			throws IOException {
+		HttpServletResponse res = (HttpServletResponse) response;
+		res.sendRedirect(url);
 	}
 }

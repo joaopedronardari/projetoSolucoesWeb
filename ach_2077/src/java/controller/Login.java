@@ -1,4 +1,4 @@
-import controller.LoginDAO;
+import repository.LoginRepository;
 import controller.SessionUtils;
 import java.io.Serializable;
 
@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 @SessionScoped
 public class Login implements Serializable {
 
+    
 	private static final long serialVersionUID = 1094801825228386363L;
 	
 	private String pwd;
@@ -45,27 +46,55 @@ public class Login implements Serializable {
 
 	//validate login
 	public String validateUsernamePassword() {
-		boolean valid = LoginDAO.validate(user, pwd);
-		if (valid) {
-			HttpSession session = SessionUtils.getSession();
-			session.setAttribute("username", user);
-			return "admin";
+		Long userId = LoginRepository.validate(user, pwd);
+                
+		if (userId > -1) {
+                        System.out.println(userId);
+			SessionUtils.setParam("username", user);
+                        SessionUtils.setParam("userid", userId);
+			return "index.xhtml";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_WARN,
 							"Incorrect Username and Passowrd",
 							"Please enter correct username and Password"));
-			return "login";
+			return "login.xhtml";
 		}
 	}
 
 	//logout event, invalidate session
 	public String logout() {
-		HttpSession session = SessionUtils.getSession();
-		session.invalidate();
-		return "login";
+		SessionUtils.invalidate();
+		return "/login.xhtml";
 	}
         
+        public String displayLogout;
+        public String displayLogin;
+
+        public String getDisplayLogout() {
+            return displayLogout;
+        }
+
+        public void setDisplayLogout(String displayLogout) {
+            this.displayLogout = displayLogout;
+        }
+
+        public String getDisplayLogin() {
+            return displayLogin;
+        }
+
+        public void setDisplayLogin(String displayLogin) {
+            this.displayLogin = displayLogin;
+        }
+        
+        public void onPreRender() {
+            displayLogout = SessionUtils.getParam("username") != null ? "" : "none";
+            displayLogin = SessionUtils.getParam("username") != null ? "none" : "";
+            if (SessionUtils.getParam("username") != null) {
+                user = (String) SessionUtils.getParam("username");
+            }
+        }
+
         
 }

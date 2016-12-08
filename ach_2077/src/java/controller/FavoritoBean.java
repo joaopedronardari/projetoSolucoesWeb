@@ -40,21 +40,21 @@ public class FavoritoBean {
         favoritos = new ArrayList<>();
         favorito = new Favorito();
         
-        //TODO: colocar id do usuario logado, if logado
         FavoritoRepository repository = new FavoritoRepository(manager);
-        if (true){
-            favoritos = repository.favoritos(1L);
+        if (SessionUtils.getParam("username") != null){
+            System.out.println("FAVORITOS DO USER -> " + SessionUtils.getParam("userid"));
+            favoritos = repository.favoritos((Long) SessionUtils.getParam("userid"));
         }
     }
     
     
     public String adicionaFavorito(){
         Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        String idUsuario = parameterMap.get("id_usuario");
+        Long idUsuario = (Long) SessionUtils.getParam("userid");
         String idImovel = parameterMap.get("id_imovel");
         
         FavoritoRepository repository = new FavoritoRepository(manager);
-        favorito.setId_usuario(Long.parseLong(idUsuario));
+        favorito.setId_usuario(idUsuario);
         favorito.setId_imovel(Long.parseLong(idImovel));
         repository.adiciona(favorito);
         

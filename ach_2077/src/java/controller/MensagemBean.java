@@ -40,11 +40,10 @@ public class MensagemBean {
         mensagensRecebidas = new ArrayList<>();
         mensagensEnviadas = new ArrayList<>();
         
-        //TODO: colocar id do usuario logado, if logado
         MensagemRepository repository = new MensagemRepository(manager);
-        if (true){
-            mensagensRecebidas = repository.mensagensRecebidas(1L);
-            mensagensEnviadas = repository.mensagensEnviadas(1L);
+        if (SessionUtils.getParam("username") != null){
+            mensagensRecebidas = repository.mensagensRecebidas((Long) SessionUtils.getParam("userid"));
+            mensagensEnviadas = repository.mensagensEnviadas((Long) SessionUtils.getParam("userid"));
         }
     }
     
@@ -56,8 +55,7 @@ public class MensagemBean {
         MensagemRepository repository = new MensagemRepository(manager);
         mensagem.setId_usuario_destinatario(Long.parseLong(idDestinatario));
         mensagem.setData_envio(new Date());
-        //TODO id do usuario da sessão
-        mensagem.setId_usuario_remetente(1L);
+        mensagem.setId_usuario_remetente((Long) SessionUtils.getParam("userid"));
         repository.adiciona(mensagem);
         
         return "imovel_view.xhtml?id_imovel=" + idImovel + "&faces-redirect=true&alert=mensagem"; 
@@ -71,8 +69,7 @@ public class MensagemBean {
         mensagem.setId_usuario_destinatario(Long.parseLong(idDestinatario));
         mensagem.setData_envio(new Date());
         mensagem.setMensagem(resposta);
-        //TODO id do usuario da sessão
-        mensagem.setId_usuario_remetente(1L);
+        mensagem.setId_usuario_remetente((Long) SessionUtils.getParam("userid"));
         repository.adiciona(mensagem);
         
         return "mensagem_list.xhtml?faces-redirect=true&alert=true"; 

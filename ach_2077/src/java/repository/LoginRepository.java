@@ -3,39 +3,42 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package repository;
 
 
+import controller.DataConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class LoginDAO {
+public class LoginRepository {
 
-	public static boolean validate(String user, String password) {
+	public static Long validate(String user, String password) {
 		Connection con = null;
 		PreparedStatement ps = null;
 
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement("select email, senha from usuarios where email = ? and senha = ?");
+			ps = con.prepareStatement("select id_usuario, email, senha from usuarios where email = ? and senha = ?");
 			ps.setString(1, user);
 			ps.setString(2, password);
-
+                        
+                        System.out.println(ps.toString());
+                        
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
 				//result found, means valid inputs
-				return true;
+                                return rs.getLong("id_usuario");
 			}
 		} catch (SQLException ex) {
 			System.out.println("Login error -->" + ex.getMessage());
-			return false;
+			return -1L;
 		} finally {
 			DataConnect.close(con);
 		}
-		return false;
+		return -1L;
 	}
 }

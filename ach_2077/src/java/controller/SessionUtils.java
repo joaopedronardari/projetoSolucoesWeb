@@ -11,27 +11,28 @@ import javax.servlet.http.HttpSession;
 
 public class SessionUtils {
 
+	private static final long serialVersionUID = 1L;
+
 	public static HttpSession getSession() {
-		return (HttpSession) FacesContext.getCurrentInstance()
-				.getExternalContext().getSession(false);
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		HttpSession sessao = (HttpSession) ctx.getExternalContext().getSession(
+				false);
+		return sessao;
 	}
 
-	public static HttpServletRequest getRequest() {
-		return (HttpServletRequest) FacesContext.getCurrentInstance()
-				.getExternalContext().getRequest();
+	public static void setParam(String key, Object value) {
+		getSession().setAttribute(key, value);
 	}
 
-	public static String getUserName() {
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
-				.getExternalContext().getSession(false);
-		return session.getAttribute("username").toString();
+	public static Object getParam(String key) {
+		return getSession().getAttribute(key);
 	}
 
-	public static String getUserId() {
-		HttpSession session = getSession();
-		if (session != null)
-			return (String) session.getAttribute("userid");
-		else
-			return null;
+	public static void remove(String key) {
+		getSession().removeAttribute(key);
+	}
+
+	public static void invalidate() {
+		getSession().invalidate();
 	}
 }
