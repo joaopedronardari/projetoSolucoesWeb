@@ -3,12 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/tricksterx/Desktop/SistemasWEB/projeto/projetoSolucoesWeb/ach_2077/web/imovel_view.xhtml</file>
-            <file>file:/home/tricksterx/Desktop/SistemasWEB/projeto/projetoSolucoesWeb/ach_2077/src/conf/persistence.xml</file>
-            <file>file:/home/tricksterx/Desktop/SistemasWEB/projeto/projetoSolucoesWeb/ach_2077/web/imovel_create.xhtml</file>
-            <file>file:/home/tricksterx/Desktop/SistemasWEB/projeto/projetoSolucoesWeb/ach_2077/web/imovel_list.xhtml</file>
-            <file>file:/home/tricksterx/Desktop/SistemasWEB/projeto/projetoSolucoesWeb/ach_2077/src/java/repository/ImovelRepository.java</file>
-            <file>file:/home/tricksterx/Desktop/SistemasWEB/projeto/projetoSolucoesWeb/ach_2077/src/java/controller/ImovelBean.java</file>
+            <file>file:/C:/Users/joaonardari/projetoSolucoesWeb/ach_2077/src/java/controller/BuscaBean.java</file>
+            <file>file:/C:/Users/joaonardari/projetoSolucoesWeb/ach_2077/web/login.xhtml</file>
+            <file>file:/C:/Users/joaonardari/projetoSolucoesWeb/ach_2077/src/java/repository/ImovelRepository.java</file>
+            <file>file:/C:/Users/joaonardari/projetoSolucoesWeb/ach_2077/web/imovel_list.xhtml</file>
+            <file>file:/C:/Users/joaonardari/projetoSolucoesWeb/ach_2077/web/index.xhtml</file>
+            <file>file:/C:/Users/joaonardari/projetoSolucoesWeb/ach_2077/src/java/controller/Login.java</file>
+            <file>file:/C:/Users/joaonardari/projetoSolucoesWeb/ach_2077/web/imovel_view.xhtml</file>
+            <file>file:/C:/Users/joaonardari/projetoSolucoesWeb/ach_2077/src/java/controller/ImovelBean.java</file>
         </group>
     </open-files>
 </project-private>
